@@ -20,6 +20,38 @@ Each release ships, per platform:
 **Beta (Canopus):** macOS only — Apple Silicon (`arm64`/`aarch64`) and Intel
 (`x86_64`). Linux and Windows builds will come later.
 
+## Installing on macOS (required for the beta)
+
+Beta builds are **not yet signed or notarized**, so macOS quarantines them on
+download. Gatekeeper's "Open Anyway" only unblocks the app itself — not the
+bundled helpers it needs (the app would launch but fail with
+`No such file or directory (os error 2)` when talking to its `digwash` and
+`libav` components). Remove the quarantine flag instead:
+
+**Desktop app (DMG):**
+
+1. Open the DMG and drag `DigWash.app` into `/Applications`.
+2. In Terminal:
+
+   ```sh
+   xattr -dr com.apple.quarantine /Applications/DigWash.app
+   ```
+
+3. Launch DigWash normally.
+
+**Command-line tool (tar.gz):**
+
+```sh
+tar -xzf digwash-<version>-macos-<arch>.tar.gz
+xattr -dr com.apple.quarantine <extracted-directory>
+```
+
+(If you downloaded with `curl` and extracted with `tar` in Terminal, there is
+no quarantine flag and the `xattr` step is a no-op.)
+
+Because you are bypassing Gatekeeper, verify the checksum first (below).
+Signed and notarized builds are planned; this step will then disappear.
+
 ## Verifying a download
 
 ```sh
