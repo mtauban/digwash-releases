@@ -37,6 +37,20 @@ Desktop file for your computer.**
 
 `SHA256SUMS` is a technical integrity-check file. Most users can ignore it.
 
+## Quick install (macOS & Linux)
+
+If you'd rather skip the manual steps below, this script detects your platform,
+downloads the right beta asset, verifies it against `SHA256SUMS`, and installs
+it for you:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/mtauban/digwash-releases/main/install.sh | sh
+```
+
+On macOS it also removes the quarantine flag (see below for why that's needed
+during beta). Always fine to read [`install.sh`](install.sh) before piping it
+to `sh` — that's true of any curl-pipe-to-shell installer.
+
 ## Installing on macOS (beta)
 
 The beta is not yet signed or notarized, so macOS quarantines the app and its
@@ -58,14 +72,12 @@ This workaround disappears once releases are signed and notarized.
 ## Installing on Windows
 
 Download the file ending in `Windows-x64-Setup.exe`, open it, and follow the
-installer. Windows builds will appear once their native release job has passed
-validation.
+installer.
 
 ## Installing on Linux
 
 Download the `.AppImage`, make it executable in your file manager's Properties
-window, then open it. Linux builds will appear once their native release job has
-passed validation.
+window (or `chmod +x` it in a terminal), then open it.
 
 ## Verify a download (optional)
 
